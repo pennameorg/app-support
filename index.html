@@ -1,4 +1,282 @@
-<html>
-  <head><title>PenName.org App Support</title></head>
-  <body><H1>Welcome to the rice fields.</H1></body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — ProofPoint Helper</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green: #39ff14;
+      --green-dim: #1a7a08;
+      --green-mid: #2dc50e;
+      --bg: #0a0a0a;
+      --bg-panel: #0d0d0d;
+      --border: #1f3d1a;
+      --text: #c8f0c0;
+      --text-dim: #6b9e63;
+      --red: #ff4444;
+      --amber: #ffb000;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 14px;
+      line-height: 1.7;
+      min-height: 100vh;
+      padding: 40px 20px 80px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Scanline overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.08) 2px,
+        rgba(0,0,0,0.08) 4px
+      );
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    /* CRT vignette */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.65) 100%);
+      pointer-events: none;
+      z-index: 99;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .site-header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 40px;
+    }
+
+    .site-tag {
+      font-family: 'VT323', monospace;
+      font-size: 13px;
+      color: var(--green-dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .site-tag::before { content: '> '; color: var(--green); }
+
+    .app-title {
+      font-family: 'VT323', monospace;
+      font-size: 52px;
+      color: var(--green);
+      line-height: 1;
+      text-shadow: 0 0 20px rgba(57,255,20,0.4), 0 0 40px rgba(57,255,20,0.15);
+      letter-spacing: 0.05em;
+      animation: flicker 8s infinite;
+    }
+
+    @keyframes flicker {
+      0%, 95%, 100% { opacity: 1; }
+      96% { opacity: 0.85; }
+      97% { opacity: 1; }
+      98% { opacity: 0.9; }
+      99% { opacity: 1; }
+    }
+
+    .app-subtitle {
+      color: var(--text-dim);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      margin-top: 6px;
+    }
+
+    /* Doc meta bar */
+    .meta-bar {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      padding: 10px 16px;
+      margin-bottom: 36px;
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+    }
+
+    .meta-bar span { color: var(--green-mid); }
+
+    /* Section */
+    .section {
+      margin-bottom: 36px;
+      border-left: 2px solid var(--green-dim);
+      padding-left: 20px;
+      animation: fadeIn 0.4s ease both;
+    }
+
+    .section:nth-child(1) { animation-delay: 0.05s; }
+    .section:nth-child(2) { animation-delay: 0.10s; }
+    .section:nth-child(3) { animation-delay: 0.15s; }
+    .section:nth-child(4) { animation-delay: 0.20s; }
+    .section:nth-child(5) { animation-delay: 0.25s; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateX(-6px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .section-label {
+      font-family: 'VT323', monospace;
+      font-size: 22px;
+      color: var(--green);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .section-label::before {
+      content: '// ';
+      color: var(--green-dim);
+    }
+
+    p {
+      color: var(--text);
+      margin-bottom: 10px;
+      font-size: 13.5px;
+    }
+
+    a {
+      color: var(--green);
+      text-decoration: none;
+      border-bottom: 1px solid var(--green-dim);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    a:hover {
+      color: #fff;
+      border-color: var(--green);
+    }
+
+    /* Status badge */
+    .badge {
+      display: inline-block;
+      background: rgba(57,255,20,0.08);
+      border: 1px solid var(--green-dim);
+      color: var(--green);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      padding: 3px 10px;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+
+    .badge::before { content: '● '; font-size: 9px; }
+
+    /* Highlight block */
+    .highlight-block {
+      background: rgba(57,255,20,0.04);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--green);
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .highlight-block strong {
+      color: var(--green-mid);
+      font-weight: normal;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 60px;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      font-size: 11px;
+      color: var(--green-dim);
+      letter-spacing: 0.08em;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    footer span { color: var(--text-dim); }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header class="site-header">
+      <div class="site-tag">privacy policy</div>
+      <h1 class="app-title">ProofPoint Helper</h1>
+      <p class="app-subtitle">iOS Application — Privacy Documentation</p>
+    </header>
+
+    <div class="badge">No data collected</div>
+
+    <div class="meta-bar">
+      <div>DOC_TYPE: <span>PRIVACY_POLICY</span></div>
+      <div>EFFECTIVE: <span>2026-04-24</span></div>
+      <div>REVISION: <span>1.0</span></div>
+      <div>STATUS: <span>ACTIVE</span></div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Overview</div>
+      <p>ProofPoint Helper does not collect, store, transmit, or share any personal information. We do not use analytics, advertising SDKs, or crash reporting services of any kind.</p>
+      <p>This policy describes what data the app handles, how it handles it, and your rights as a user.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Data We Collect</div>
+      <div class="highlight-block">
+        <strong>We collect no data of any kind from users of this application.</strong>
+      </div>
+      <p>No personal information, usage statistics, device identifiers, or behavioral data are gathered, logged, or transmitted to us at any time.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Third-Party Services</div>
+      <p>ProofPoint Helper connects to the Proofpoint Reporting API to retrieve security data on your behalf. This connection is made directly between the app and Proofpoint's servers using credentials you supply. We do not intermediate, log, or retain any data returned by the API.</p>
+      <p>Your use of the Proofpoint Reporting API is governed by Proofpoint's own privacy policy:</p>
+      <p><a href="https://www.proofpoint.com/us/privacy-policy" target="_blank" rel="noopener">https://www.proofpoint.com/us/privacy-policy</a></p>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Credentials &amp; Local Storage</div>
+      <p>Any API credentials you enter in the app are stored locally on your device using iOS Keychain — Apple's secure credential storage system. Credentials are never transmitted to us or any third party other than Proofpoint directly, and only for the purpose of fulfilling your API requests.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Contact</div>
+      <p>Questions about this privacy policy? Reach out:</p>
+      <p><a href="mailto:support@penname.org">support@penname.org</a></p>
+    </div>
+
+    <footer>
+      <div>ProofPoint Helper — Privacy Policy v1.0</div>
+      <div>Last updated: <span>April 24, 2026</span></div>
+    </footer>
+
+  </div>
+</body>
 </html>
