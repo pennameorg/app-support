@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support — ProofPoint Helper</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green: #39ff14;
+      --green-dim: #1a7a08;
+      --green-mid: #2dc50e;
+      --bg: #0a0a0a;
+      --bg-panel: #0d0d0d;
+      --border: #1f3d1a;
+      --text: #c8f0c0;
+      --text-dim: #6b9e63;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 14px;
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 40px 20px 80px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.08) 2px,
+        rgba(0,0,0,0.08) 4px
+      );
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.65) 100%);
+      pointer-events: none;
+      z-index: 99;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      width: 100%;
+      flex: 1;
+    }
+
+    .site-header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 40px;
+    }
+
+    .site-tag {
+      font-family: 'VT323', monospace;
+      font-size: 13px;
+      color: var(--green-dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .site-tag::before { content: '> '; color: var(--green); }
+
+    .app-title {
+      font-family: 'VT323', monospace;
+      font-size: 52px;
+      color: var(--green);
+      line-height: 1;
+      text-shadow: 0 0 20px rgba(57,255,20,0.4), 0 0 40px rgba(57,255,20,0.15);
+      letter-spacing: 0.05em;
+      animation: flicker 8s infinite;
+    }
+
+    @keyframes flicker {
+      0%, 95%, 100% { opacity: 1; }
+      96% { opacity: 0.85; }
+      97% { opacity: 1; }
+      98% { opacity: 0.9; }
+      99% { opacity: 1; }
+    }
+
+    .app-subtitle {
+      color: var(--text-dim);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      margin-top: 6px;
+    }
+
+    .meta-bar {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      padding: 10px 16px;
+      margin-bottom: 48px;
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+    }
+
+    .meta-bar span { color: var(--green-mid); }
+
+    /* Center card */
+    .support-card {
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--green);
+      background: rgba(57,255,20,0.03);
+      padding: 40px 36px;
+      animation: fadeIn 0.4s ease both;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .support-label {
+      font-family: 'VT323', monospace;
+      font-size: 22px;
+      color: var(--green);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .support-label::before {
+      content: '// ';
+      color: var(--green-dim);
+    }
+
+    .support-card p {
+      color: var(--text-dim);
+      font-size: 13.5px;
+      margin-bottom: 28px;
+    }
+
+    .email-link {
+      display: inline-block;
+      font-family: 'VT323', monospace;
+      font-size: 32px;
+      color: var(--green);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-shadow: 0 0 16px rgba(57,255,20,0.35);
+      border-bottom: 2px solid var(--green-dim);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s, text-shadow 0.2s;
+    }
+
+    .email-link:hover {
+      color: #fff;
+      border-color: var(--green);
+      text-shadow: 0 0 24px rgba(57,255,20,0.6);
+    }
+
+    .prompt {
+      margin-top: 32px;
+      font-size: 11px;
+      color: var(--green-dim);
+      letter-spacing: 0.12em;
+    }
+
+    .prompt::before { content: '_ '; animation: blink 1.2s step-end infinite; }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    footer {
+      margin-top: 60px;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      font-size: 11px;
+      color: var(--green-dim);
+      letter-spacing: 0.08em;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    footer a {
+      color: var(--text-dim);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s;
+    }
+
+    footer a:hover { color: var(--green); }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header class="site-header">
+      <div class="site-tag">support</div>
+      <h1 class="app-title">ProofPoint Helper</h1>
+      <p class="app-subtitle">iOS Application — Support</p>
+    </header>
+
+    <div class="meta-bar">
+      <div>DOC_TYPE: <span>SUPPORT</span></div>
+      <div>CHANNEL: <span>EMAIL</span></div>
+      <div>STATUS: <span>ACTIVE</span></div>
+    </div>
+
+    <div class="support-card">
+      <div class="support-label">Contact Support</div>
+      <p>For any issues, questions, or feedback regarding ProofPoint Helper, send us an email and we'll get back to you as soon as possible.</p>
+      <a class="email-link" href="mailto:support@penname.org">support@penname.org</a>
+      <div class="prompt">awaiting input</div>
+    </div>
+
+    <footer>
+      <div>ProofPoint Helper — Support</div>
+      <div><a href="privacy-policy.html">Privacy Policy</a></div>
+    </footer>
+
+  </div>
+</body>
+</html>
